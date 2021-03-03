@@ -13,12 +13,11 @@ if ($conn->connect_error) {
 }
 //echo "Connected successfully";
 
-$food_id = $_GET['food_id'];
+$user_id = $_GET['user_id'];
 //Show the content of the table
-$sql = "SELECT masses.*,food.* FROM masses
-INNER JOIN food ON food.food_id=masses.food_id
-WHERE masses.food_id = " . $food_id .
-" ORDER BY date DESC LIMIT 1";
+$sql = "SELECT food_id FROM food
+WHERE user_id = " . $user_id .
+" ORDER BY name ASC";
 
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0){

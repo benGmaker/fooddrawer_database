@@ -19,7 +19,6 @@ $sql_create_masses_table =
     id integer PRIMARY KEY AUTO_INCREMENT,
     food_id integer NOT NULL,
     mass integer NOT NULL,
-    unit text NOT NULL,
     date DATETIME NOT NULL
 );";
 $sql_create_user_table = 
@@ -33,6 +32,7 @@ $sql_create_food_table =
 " CREATE TABLE IF NOT EXISTS food (
     food_id integer PRIMARY KEY AUTO_INCREMENT,
     user_id integer NOT NULL,
+    unit text NOT NULL,
     name text NOT NULL
 );";
 mysqli_query($conn, $sql_create_masses_table);
@@ -84,4 +84,8 @@ if (mysqli_num_rows($result) > 0){
 } else {
  echo "0 results";
 }
+//echo date("Y-m-d", mktime(date("m") , date("d") - 5, date("Y")));
+define('SECONDS_PER_DAY', 86400);
+echo date('Y-m-d H:i:s', time() - 5 * SECONDS_PER_DAY);
+//echo strtotime(date("Y-m-d", strtotime("-5 day")))
 ?>

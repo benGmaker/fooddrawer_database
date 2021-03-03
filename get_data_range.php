@@ -14,11 +14,14 @@ if ($conn->connect_error) {
 //echo "Connected successfully";
 
 $food_id = $_GET['food_id'];
+$numdays = $_GET['days'];
+define('SECONDS_PER_DAY', 86400);
+$date = date('Y-m-d', time() - $numdays * SECONDS_PER_DAY);
 //Show the content of the table
 $sql = "SELECT masses.*,food.* FROM masses
 INNER JOIN food ON food.food_id=masses.food_id
-WHERE masses.food_id = " . $food_id .
-" ORDER BY date DESC LIMIT 1";
+WHERE masses.food_id = " . $food_id . " AND masses.date > " . $date . " 
+ORDER BY date ASC";
 
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0){
