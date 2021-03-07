@@ -25,8 +25,6 @@ if (mysqli_num_rows($result) > 0){
  while($row = mysqli_fetch_assoc($result)) {
  //echo "id: " . $row["id"]." Food_id: " . $row["food_id"]." Mass: ".$row["mass"]." date: " . $row["date"]."<br>";
  }
-} else {
- echo "0 results";
 }
 if ($result = mysqli_query($conn, $sql))
 {
@@ -42,7 +40,6 @@ if ($result = mysqli_query($conn, $sql))
  $tempArray = $row;
      array_push($resultArray, $tempArray);
  }
- //echo ;
  // Encode the array to JSON and output the results
  echo json_encode($resultArray);
 }

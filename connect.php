@@ -59,13 +59,13 @@ else {
 
 //Get values from the python code
 //$user_id = $_GET['user_id'];
-$unit = $_GET['unit'];
+//$unit = $_GET['unit'];
 $food_id = $_GET['food_id'];
 $mass = $_GET['mass'];
 
 //Add values to table
-$sql = "INSERT INTO masses (food_id, mass, unit, date)
-VALUES (" . $food_id . ", ". $mass .", '". $unit ."', '". date("Y-m-d H:i:s") ."')";
+$sql = "INSERT INTO masses (food_id, mass, date)
+VALUES (" . $food_id . ", ". $mass .", '". date("Y-m-d H:i:s") ."')";
 
 if (mysqli_query($conn, $sql)) {
  echo "New record created successfully<br>";
@@ -81,11 +81,5 @@ if (mysqli_num_rows($result) > 0){
  while($row = mysqli_fetch_assoc($result)) {
  echo "id: " . $row["id"]." Food_id: " . $row["food_id"]." Mass: ".$row["mass"]." date: " . $row["date"]."<br>";
  }
-} else {
- echo "0 results";
 }
-//echo date("Y-m-d", mktime(date("m") , date("d") - 5, date("Y")));
-define('SECONDS_PER_DAY', 86400);
-echo date('Y-m-d H:i:s', time() - 5 * SECONDS_PER_DAY);
-//echo strtotime(date("Y-m-d", strtotime("-5 day")))
 ?>
