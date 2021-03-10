@@ -13,27 +13,15 @@ if ($conn->connect_error) {
 }
 //echo "Connected successfully";
 
-$food_id = $_GET['food_id'];
-//Show the content of the table
-$sql = "SELECT masses.*,food.* FROM masses
-INNER JOIN food ON food.food_id=masses.food_id
-WHERE masses.food_id IN ($food_id) ORDER BY date DESC LIMIT 1";
-//" GROUP BY masses.food_id";
-// ORDER BY date DESC LIMIT 1";
-
-$sql = "SELECT masses.*,food.* FROM masses
-INNER JOIN food ON food.food_id=masses.food_id
-WHERE masses.food_id IN ($food_id)";
-//GROUP BY masses.food_id";
-
+$user_id = $_GET['user_id'];
+//Show the last item of each food_id
 $sql = "SELECT masses.id,masses.mass,masses.date,food.*
-        FROM masses 
-        INNER JOIN food ON food.food_id=masses.food_id 
-        WHERE masses.id IN (SELECT MAX(masses.id) 
+        FROM food 
+        INNER JOIN masses ON masses.food_id=food.food_id 
+        WHERE food.user_id = $user_id AND
+              masses.id IN (SELECT MAX(masses.id)
                             FROM masses 
-                            GROUP BY masses.food_id)
-                            AND masses.food_id IN ($food_id)";
-//WHERE food_id IN ($food_id)";
+                            GROUP BY masses.food_id)";
 
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0){
