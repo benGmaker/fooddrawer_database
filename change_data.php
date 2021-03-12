@@ -11,21 +11,22 @@ $conn = new mysqli($servername, $username, $password, $db);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
 
-//Get values from the python code
-//$user_id = $_GET['user_id'];
+//Get values from the app
 $unit = $_GET['unit'];
 $name = $_GET['name'];
 $food_id = $_GET['food_id'];
+$exp = $_GET['exp'];
 
 //change values to food
-if ($unit != "" && $name != ""){
-    $sql = "UPDATE `food` SET `unit`='" . $unit . "',`name`='" . $name . "' WHERE food_id=" . $food_id;
-} elseif ($unit != "") {
-	$sql = "UPDATE `food` SET `unit`='" . $unit . "' WHERE food_id=" . $food_id;
-} else {
+if ($name != ""){
     $sql = "UPDATE `food` SET `name`='" . $name . "' WHERE food_id=" . $food_id;
+} 
+if ($unit != "") {
+	$sql = "UPDATE `food` SET `unit`='" . $unit . "' WHERE food_id=" . $food_id;
+} 
+if ($exp != "") {
+	$sql = "UPDATE `food` SET `Expiration`='" . $exp . "' WHERE food_id=" . $food_id;
 }
 
 if (mysqli_query($conn, $sql)) {

@@ -11,7 +11,6 @@ $conn = new mysqli($servername, $username, $password, $db);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-//echo "Connected successfully";
 
 $food_id = $_GET['food_id'];
 //Show the content of the table
@@ -21,12 +20,6 @@ WHERE masses.food_id = " . $food_id .
 " ORDER BY date DESC LIMIT 1";
 
 $result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0){
- // output data of each row
- while($row = mysqli_fetch_assoc($result)) {
- //echo "id: " . $row["id"]." Food_id: " . $row["food_id"]." Mass: ".$row["mass"]." date: " . $row["date"]."<br>";
- }
-}
 if ($result = mysqli_query($conn, $sql))
 {
  // We have results, create an array to hold the results

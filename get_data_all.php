@@ -11,7 +11,6 @@ $conn = new mysqli($servername, $username, $password, $db);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-//echo "Connected successfully";
 
 $user_id = $_GET['user_id'];
 //Show the last item of each food_id
@@ -25,12 +24,6 @@ $sql = "SELECT masses.food_id,masses.mass,food.unit,food.name
         ORDER BY food.name";
 
 $result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0){
- // output data of each row
- while($row = mysqli_fetch_assoc($result)) {
- //echo "id: " . $row["id"]." Food_id: " . $row["food_id"]." Mass: ".$row["mass"]." date: " . $row["date"]."<br>";
- }
-}
 if ($result = mysqli_query($conn, $sql))
 {
  // We have results, create an array to hold the results
@@ -45,7 +38,6 @@ if ($result = mysqli_query($conn, $sql))
  $tempArray = $row;
      array_push($resultArray, $tempArray);
  }
- //echo ;
  // Encode the array to JSON and output the results
  echo json_encode($resultArray);
 }

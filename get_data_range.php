@@ -11,7 +11,6 @@ $conn = new mysqli($servername, $username, $password, $db);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-//echo "Connected successfully";
 
 $user_id = $_GET['user_id'];
 //Show the content of the table
@@ -70,7 +69,8 @@ foreach($resultArrayfood as $result) {
          array_push($resultArray, $tempArray);
      }
     }
-array_push($Final_data, Array('food_id' => $food_id, 'data' => $resultArray));
+//array_push($Final_data, $food_id => Array($resultArray));
+$Final_data[$food_id] = $resultArray;
 }
 echo json_encode($Final_data);
 ?>
