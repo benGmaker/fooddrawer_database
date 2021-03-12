@@ -1,12 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "user123";
-$password = "pw12345";
-$db = 'fooddrawer_data';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-
+include('connection.php');
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
@@ -46,13 +39,14 @@ foreach($resultArrayfood as $result) {
     $food_id = $result['food_id'];
     $numdays = $_GET['days'];
     define('SECONDS_PER_DAY', 86400);
-    $date = date('Y-m-d H:m:s', time() - $numdays * SECONDS_PER_DAY);
+    $date = date('Y-m-d H', time() - $numdays * SECONDS_PER_DAY);
     //Show the content of the table
-    $sql = "SELECT masses.mass,masses.date FROM masses
+    $sql = "SELECT AVG(masses.mass) as mass,masses.date FROM masses
     INNER JOIN food ON food.food_id=masses.food_id
     WHERE food.food_id = $food_id AND masses.date > '$date'
+    GROUP BY masses.date
     ORDER BY masses.date ASC";
-
+    //echo $sql.'<br>';
     $result = mysqli_query($conn, $sql);
     if ($result = mysqli_query($conn, $sql))
     {

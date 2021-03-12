@@ -1,12 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "user123";
-$password = "pw12345";
-$db = 'fooddrawer_data';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-
+include('connection.php');
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
@@ -45,7 +38,7 @@ $mass = $_GET['mass'];
 
 //Add values to table
 $sql = "INSERT INTO masses (food_id, mass, date)
-VALUES ($food_id, $mass, '". date("Y-m-d H:i:s") ."')";
+VALUES ($food_id, $mass, '". date("Y-m-d H") ."')";
 
 mysqli_query($conn, $sql)
 ?>

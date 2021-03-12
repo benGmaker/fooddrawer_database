@@ -1,12 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "user123";
-$password = "pw12345";
-$db = 'fooddrawer_data';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-
+include('connection.php');
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
