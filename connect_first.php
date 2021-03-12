@@ -6,20 +6,25 @@ if ($conn->connect_error) {
 }
 //echo "Connected successfully";
 
-$user_id = $_GET['user_id'];
-//Show the last item of each food_id
-$sql = "SELECT masses.mass,food.name
-        FROM food 
-        INNER JOIN masses ON masses.food_id=food.food_id 
-        WHERE food.user_id = $user_id AND
-              masses.id IN (SELECT MAX(masses.id)
-                            FROM masses
-                            GROUP BY masses.food_id)
-              AND masses.mass <= food.low
-        ORDER BY food.name";
+//Get values from the python code
+$MAC = $_GET['mac'];
 
-$result = mysqli_query($conn, $sql);
-if ($result = mysqli_query($conn, $sql))
+//Add values to table
+$sql_add =  "INSERT INTO food (IP,MAC)
+            VALUES ('" . $_SERVER['REMOTE_ADDR'] . "', '$MAC')";
+
+$sql_id =   "SELECT food_id FROM food
+            WHERE mac = '$MAC'";
+
+$result = mysqli_query($conn, $sql_id);
+$row_cnt = $result->num_rows;
+//echo $row_cnt;
+if($row_cnt == 0){
+    mysqli_query($conn, $sql_add);
+}
+
+$result = mysqli_query($conn, $sql_id);
+if ($result = mysqli_query($conn, $sql_id))
 {
  // We have results, create an array to hold the results
         // and an array to hold the data
@@ -36,4 +41,5 @@ if ($result = mysqli_query($conn, $sql))
  // Encode the array to JSON and output the results
  echo json_encode($resultArray);
 }
+
 ?>

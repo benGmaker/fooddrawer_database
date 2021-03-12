@@ -14,27 +14,14 @@ $exp = $_GET['exp'];
 //change values to food
 if ($name != ""){
     $sql = "UPDATE `food` SET `name`='" . $name . "' WHERE food_id=" . $food_id;
+	mysqli_query($conn, $sql);
 } 
 if ($unit != "") {
 	$sql = "UPDATE `food` SET `unit`='" . $unit . "' WHERE food_id=" . $food_id;
+	mysqli_query($conn, $sql);
 } 
 if ($exp != "") {
 	$sql = "UPDATE `food` SET `Expiration`='" . $exp . "' WHERE food_id=" . $food_id;
-}
-
-if (mysqli_query($conn, $sql)) {
- echo "Record has been changed<br>";
-} else {
- echo "Error: " . $sql . "<br>" . mysqli_error($conn) . "<br>";
-}
-
-//Show the content of the table
-$sql = "SELECT * FROM food";
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0){
- // output data of each row
- while($row = mysqli_fetch_assoc($result)) {
- echo "food_id: " . $row["food_id"]." name: " . $row["name"]." unit: ".$row["unit"]."<br>";
- }
+	mysqli_query($conn, $sql);
 }
 ?>

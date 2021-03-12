@@ -42,10 +42,10 @@ foreach($resultArrayfood as $result) {
     $date = date('Y-m-d H', time() - $numdays * SECONDS_PER_DAY);
     //Show the content of the table
     $sql = "SELECT AVG(masses.mass) as mass,masses.date FROM masses
-    INNER JOIN food ON food.food_id=masses.food_id
-    WHERE food.food_id = $food_id AND masses.date > '$date'
-    GROUP BY masses.date
-    ORDER BY masses.date ASC";
+            INNER JOIN food ON food.food_id=masses.food_id
+            WHERE food.food_id = $food_id AND masses.date > '$date'
+            GROUP BY masses.date
+            ORDER BY masses.date ASC";
     //echo $sql.'<br>';
     $result = mysqli_query($conn, $sql);
     if ($result = mysqli_query($conn, $sql))
@@ -63,7 +63,6 @@ foreach($resultArrayfood as $result) {
          array_push($resultArray, $tempArray);
      }
     }
-//array_push($Final_data, $food_id => Array($resultArray));
 $Final_data[$food_id] = $resultArray;
 }
 echo json_encode($Final_data);

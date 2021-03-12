@@ -10,7 +10,8 @@ $user_id = $_GET['user_id'];
 $sql = "SELECT masses.food_id,masses.mass,food.unit,food.name
         FROM food 
         INNER JOIN masses ON masses.food_id=food.food_id 
-        WHERE food.user_id = $user_id AND
+        WHERE (food.user_id = 1 OR food.IP = '" . $_SERVER['REMOTE_ADDR'] . "')
+        		AND
               masses.id IN (SELECT MAX(masses.id)
                             FROM masses
                             GROUP BY masses.food_id)
