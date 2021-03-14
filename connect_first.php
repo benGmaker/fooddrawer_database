@@ -36,10 +36,15 @@ if ($result = mysqli_query($conn, $sql_id))
  {
  // Add each result into the results array
  $tempArray = $row;
+ $food_id = $row['food_id'];
      array_push($resultArray, $tempArray);
  }
  // Encode the array to JSON and output the results
  echo json_encode($resultArray);
 }
-
+$sql_mass =  "INSERT INTO masses (food_id,mass,date)
+            VALUES ($food_id, 0, '". date("Y-m-d H") ."')";
+if($row_cnt == 0){
+    mysqli_query($conn, $sql_mass);
+}
 ?>

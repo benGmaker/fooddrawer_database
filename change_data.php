@@ -20,7 +20,7 @@ if ($name != ""){
 if ($name != ""){
     $sql = "UPDATE `food` SET `name`='" . $name . "' WHERE food_id=" . $food_id;
 	mysqli_query($conn, $sql);
-} 
+}
 if ($unit != "") {
 	$sql = "UPDATE `food` SET `unit`='" . $unit . "' WHERE food_id=" . $food_id;
 	mysqli_query($conn, $sql);

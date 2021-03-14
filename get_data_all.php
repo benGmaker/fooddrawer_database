@@ -7,7 +7,7 @@ if ($conn->connect_error) {
 
 $user_id = $_GET['user_id'];
 //Show the last item of each food_id
-$sql = "SELECT food.food_id,masses.mass,food.unit,food.name
+$sql = "SELECT food.user_id,food.food_id,masses.mass,food.unit,food.name,food.Expiration
         FROM masses 
         RIGHT JOIN food ON food.food_id=masses.food_id 
         WHERE ((food.user_id = $user_id 
