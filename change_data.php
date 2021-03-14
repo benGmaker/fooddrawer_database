@@ -10,8 +10,13 @@ $unit = $_GET['unit'];
 $name = $_GET['name'];
 $food_id = $_GET['food_id'];
 $exp = $_GET['exp'];
+$user_id = $_GET['user_id'];
 
 //change values to food
+if ($name != ""){
+    $sql = "UPDATE `food` SET `user_id`='" . $user_id . "', `IP`=NULL WHERE food_id=" . $food_id;
+	mysqli_query($conn, $sql);
+} 
 if ($name != ""){
     $sql = "UPDATE `food` SET `name`='" . $name . "' WHERE food_id=" . $food_id;
 	mysqli_query($conn, $sql);

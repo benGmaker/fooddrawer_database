@@ -10,13 +10,16 @@ $user_id = $_GET['user_id'];
 $sql = "SELECT food.food_id,masses.mass,food.unit,food.name
         FROM masses 
         RIGHT JOIN food ON food.food_id=masses.food_id 
-        WHERE ((food.user_id = $user_id OR food.IP = '" . $_SERVER['REMOTE_ADDR'] . "')
-        		AND
-              masses.id IN (SELECT MAX(masses.id)
+        WHERE ((food.user_id = $user_id 
+                OR 
+              food.IP = '" . $_SERVER['REMOTE_ADDR'] . "')
+        		    AND
+              (masses.id IN (SELECT MAX(masses.id)
                             FROM masses
                             RIGHT JOIN food ON food.food_id = masses.food_id
                             GROUP BY masses.food_id))
-              OR food.food_id NOT IN (SELECT masses.food_id FROM masses)
+                OR 
+              food.food_id NOT IN (SELECT masses.food_id FROM masses))
         ORDER BY food.name";
 
 $result = mysqli_query($conn, $sql);
